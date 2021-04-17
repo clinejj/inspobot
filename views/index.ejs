@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>inspobot - daily inspiration delivered to your slack</title>
+    <meta name="description" content="A Slackbot that sends daily messages of inspiration and motivation">
+    <link id="favicon" rel="icon" href="https://cdn.glitch.com/6ee0563c-7fd0-476b-a86d-5b01ea9ad656%2FRobot_icon.ico?v=1565277603511" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="slack-app-id" content="ALYR7L29F">
+
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <header>
+      <h1>
+        inspobot
+      </h1>
+    </header>
+
+    <main>
+      <p class="bold">get daily inspiration sent to your slack</p>
+      
+      <% if (user && team) { %> 
+        <p>
+          <a href="/inspire">click here</a>&nbsp;to configure inspobot
+        </p>
+      <% } else { %>
+        <p>please start with one of the following:</p>
+        <ul>
+          <li>
+            <a href="/install">click here to install to slack</a>&nbsp;(if you <span class="italic">have not</span> used inspobot before)
+          </li>
+          <% if (!user) { %>
+            <li>
+              <a href="/login">click here to sign in</a>&nbsp;(if you <span class="italic">have</span> used inspobot before)
+            </li>
+          <% } %>
+        </ul>
+      <% } %>
+      <p>
+        please note this is still in <span class="rainbow-text bold">development</span>, so things might be a little wonky.
+      </p>
+      
+      <p>
+        example screenshot:
+      </p>
+      <p>
+        <img src="https://cdn.glitch.com/6ee0563c-7fd0-476b-a86d-5b01ea9ad656%2Finspobot_screen.jpg?v=1565906431663" style="width:600px;" />
+      </p>
+      
+      <p>
+        inspobot currently only supports receiving a direct message and inviting to channels! coming soon:
+        <ul>
+          <li>more emojis 🎉🎈🙌</li>
+          <li>more languages 🗣</li>
+          <li>custom messages 📝</li>
+          <li>a bit of polish 🎨</li>
+        </ul>
+      </p>
+    
+    <p class="bold">
+      what kind of data do you collect?
+    </p>
+    <p>
+      we collect user and team ids, user name and display names, and access tokens required for usage with the Slack API.
+      we do NOT log or record (or respond) to any messages sent to the bot or a channel the bot is in.
+      we do NOT collect email addresses or any other metadata about users or workspaces.
+    </p>
+    </main>
+
+    <%- include('components/footer', { user: user }); %>
+
+    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
+    <script src="https://button.glitch.me/button.js"></script>
+
+  </body>
+</html>

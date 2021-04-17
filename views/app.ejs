@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>inspobot - daily inspiration delivered to your slack</title>
+    <meta name="description" content="A Slackbot that sends daily messages of inspiration and motivation">
+    <link id="favicon" rel="icon" href="https://cdn.glitch.com/6ee0563c-7fd0-476b-a86d-5b01ea9ad656%2FRobot_icon.ico?v=1565277603511" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="slack-app-id" content="ALYR7L29F">
+
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <header>
+      <h1>
+        welcome
+      </h1>
+    </header>
+
+    <main>
+      <% if (error && error.message) { %>
+        <p>
+          whoops! we ran into an error. details:
+        </p>
+        <p>
+          <%= error.message %>
+        </p>
+        <p>
+          <a href="javascript:window.location.reload();">refresh</a> or return <a href="/">home</a>
+        </p>
+      <% } else { %>
+        <p>👋 hey <%= user.displayName ? user.displayName : user.name %>!</p>  
+        <% if (flashMessage) { %><p class="bold"><%= flashMessage %></p><% } %>
+        <% if (team) { %>
+          <p>select what time you want to receive your daily messages:</p>
+          <form id="form_time_<%= user.userId %>" role="form" action="/messages/time" accept-charset="UTF-8" method="post">
+            <p>
+              Time:
+              <select id="hours_<%= user.userId %>" type="text" name="hours">
+                <% for (hour in timeValues.hours) { %>
+                  <option value="<%= hour %>" <% if (hour == user.job.hour) { %>selected<% } %>><%= hour %></option>
+                <% } %>
+              </select>
+              <select id="minutes_<%= user.userId %>" type="text" name="minutes">
+                <% for (minute in timeValues.minutes) { %>
+                  <option value="<%= minute %>" <% if (minute == user.job.minute) { %>selected<% } %>><%= minute %></option>
+                <% } %>
+              </select>
+              &nbsp;
+              <label for="weekdaysOnly">Weekdays Only:</label>
+              <input id="weekdaysOnly_<%= user.userId %>" type="checkbox" name="weekdaysOnly" <% if (user.job.weekdaysOnly) { %>checked<% } %> style="display:inline-block;width:14px;">
+            </p>
+            <input id="userId_<%= user.userId %>" name="userId" type="hidden" value="<%= user.userId %>">
+            <input type="submit" name="submit" value="Submit" id="formSubmit_<%= user.userId %>">
+          </form>
+          <p>don't worry, we'll send them in the same time zone as what you have configured in slack</p>
+          <% if (publicChannels.length || privateChannels.length) { %>
+            <hr />
+            <p class="bold">channels</p>
+            <% if (publicChannels.length) { %>
+              <p>public channels</p>
+              <% for (let chan in publicChannels) { %>
+                <% let channel = publicChannels[chan] %>
+                <form id="form_time_<%= channel.userId %>" role="form" action="/messages/time" accept-charset="UTF-8" method="post">
+                  <p class="bold">#<%= channel.name %></p>
+                  <p>
+                    Time:
+                    <select id="hours_<%= channel.userId %>" type="text" name="hours">
+                      <% for (hour in timeValues.hours) { %>
+                        <option value="<%= hour %>" <% if (hour == channel.job.hour) { %>selected<% } %>><%= hour %></option>
+                      <% } %>
+                    </select>
+                    <select id="minutes_<%= channel.userId %>" type="text" name="minutes">
+                      <% for (minute in timeValues.minutes) { %>
+                        <option value="<%= minute %>" <% if (minute == channel.job.minute) { %>selected<% } %>><%= minute %></option>
+                      <% } %>
+                    </select>
+                    &nbsp;
+                    <label for="weekdaysOnly">Weekdays Only:</label>
+                    <input id="weekdaysOnly_<%= channel.userId %>" type="checkbox" name="weekdaysOnly" <% if (channel.job.weekdaysOnly) { %>checked<% } %> style="display:inline-block;width:14px;">
+                    <input id="userId_<%= channel.userId %>" name="userId" type="hidden" value="<%= channel.userId %>">
+                    <input type="submit" name="submit" value="Submit" id="formSubmit_<%= channel.userId %>">
+                  </p>
+                </form>
+              <% } %>
+            <% } %>
+            <% if (privateChannels.length) { %>
+              <p>private channels</p>
+              <% for (let chan in privateChannels) { %>
+                <% let channel = privateChannels[chan] %>
+                <form id="form_time_<%= channel.userId %>" role="form" action="/messages/time" accept-charset="UTF-8" method="post">
+                  <p class="bold">🔒<%= channel.name %></p>
+                  <p>
+                    Time:
+                    <select id="hours_<%= channel.userId %>" type="text" name="hours">
+                      <% for (hour in timeValues.hours) { %>
+                        <option value="<%= hour %>" <% if (hour == channel.job.hour) { %>selected<% } %>><%= hour %></option>
+                      <% } %>
+                    </select>
+                    <select id="minutes_<%= channel.userId %>" type="text" name="minutes">
+                      <% for (minute in timeValues.minutes) { %>
+                        <option value="<%= minute %>" <% if (minute == channel.job.minute) { %>selected<% } %>><%= minute %></option>
+                      <% } %>
+                    </select>
+                    &nbsp;
+                    <label for="weekdaysOnly">Weekdays Only:</label>
+                    <input id="weekdaysOnly_<%= channel.userId %>" type="checkbox" name="weekdaysOnly" <% if (channel.job.weekdaysOnly) { %>checked<% } %> style="display:inline-block;width:14px;">
+                    <input id="userId_<%= channel.userId %>" name="userId" type="hidden" value="<%= channel.userId %>">
+                    <input type="submit" name="submit" value="Submit" id="formSubmit_<%= channel.userId %>">
+                  </p>
+                </form>
+              <% } %>
+            <% } %>
+          <% } %>
+        <% } else { %>
+          <p>it looks like you haven't added inspobot to your slack workspace yet.</p>
+          <p> go <a href="/install">here</a> to add it.</p>
+        <% } %>
+      <% } %>
+    </main>
+    
+    <%- include('components/footer', { user: user }); %>
+  </body>
+</html>

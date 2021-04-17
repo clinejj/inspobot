@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>inspobot - daily inspiration delivered to your slack</title>
+    <meta name="description" content="A Slackbot that sends daily messages of inspiration and motivation">
+    <link id="favicon" rel="icon" href="https://cdn.glitch.com/6ee0563c-7fd0-476b-a86d-5b01ea9ad656%2FRobot_icon.ico?v=1565277603511" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="slack-app-id" content="ALYR7L29F">
+
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <header>
+      <h1>
+        inspobot
+      </h1>
+    </header>
+
+    <main>
+      <% if (error && error.message) { %><p class="bold"><%= error.message %></p><% } %>
+      <p>click the button below to install inspobot</p>
+      <p>
+        <a href="<%= addToSlackURL %>"><img alt="Add Inspobot to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>
+      </p>
+    </main>
+
+    <%- include('components/footer', { user: user }); %>
+
+    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
+    <script src="https://button.glitch.me/button.js"></script>
+
+  </body>
+</html>
