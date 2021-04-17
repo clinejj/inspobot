@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>inspobot admin</title>
+    <meta name="description" content="A Slackbot that sends daily messages of inspiration and motivation">
+    <link id="favicon" rel="icon" href="https://cdn.glitch.com/6ee0563c-7fd0-476b-a86d-5b01ea9ad656%2FRobot_icon.ico?v=1565277603511" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <header>
+      <h1>
+        inspobot admin
+      </h1>
+    </header>
+
+    <main>
+      <p>
+        <% if (users) { %>users<% } else { %><a href="/admin/users">users</a><% } %> -
+        &nbsp;<% if (teams) { %>teams<% } else { %><a href="/admin/teams">teams</a><% } %> -
+        &nbsp;<% if (jobs) { %>jobs<% } else { %><a href="/admin/jobs">jobs</a><% } %>
+      </p>
+      <p>
+        <table>
+          <thead>
+            <tr>
+              <% for (let idx in keys) { %>
+                <th><%= keys[idx] %></th>
+              <% } %>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let idx in models) { %>
+              <tr>
+                <% for (let key in keys) { %>
+                  <% let value = models[idx][keys[key]] %>
+                  <% if (keys[key].indexOf('Token') >= 0) value = value.slice(0, 4) + '...' + value.slice(-4) %>
+                  <% if (keys[key].indexOf('createdAt') >= 0 || keys[key].indexOf('updatedAt') >= 0) value = value.slice(0, 19) %>
+                  <td><%= value %>
+                  </td>
+                <% } %>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </p>
+    </main>
+
+     <%- include('components/footer', { user: false }); %>
+    
+  </body>
+</html>

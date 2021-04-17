@@ -1,0 +1,8 @@
+daemonize yes
+dir /app/.data
+
+save 60 1
+stop-writes-on-bgsave-error no
+rdbcompression yes
+rdbchecksum yes
+dbfilename redis.rdb

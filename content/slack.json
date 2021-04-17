@@ -1,0 +1,108 @@
+{
+  "timeSelectBlocks": [
+    {
+      "type": "section",
+      "text": {
+        "type": "plain_text",
+        "text": "Thanks for adding me to this channel! What time would you like me to send messages?",
+        "emoji": true
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "Please select a time:"
+      },
+      "accessory": {
+        "type": "static_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select a time",
+          "emoji": true
+        },
+        "initial_option": {
+          "text": {
+            "type": "plain_text",
+            "text": "09:00",
+            "emoji": true
+          },
+          "value": "9-0"
+        },
+        "action_id": "timeSelect",
+        "options": [
+        ]
+      }
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "mrkdwn",
+          "text": "You can select more times on the <https://inspobot.glitch.me/inspire|website>. Messages will be sent in *your* time zone."
+        }
+      ]
+    }
+  ],
+  "daySelectBlocks": [
+    {
+      "type": "section",
+      "text": {
+        "type": "plain_text",
+        "text": "Thanks for picking a time! Which days of the week would you like me to send?",
+        "emoji": true
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "Please select which days:"
+      },
+      "accessory": {
+        "type": "static_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select which days",
+          "emoji": true
+        },
+        "initial_option": {
+          "text": {
+            "type": "plain_text",
+            "text": "Mon-Fri",
+            "emoji": true
+          },
+          "value": "MON-FRI"
+        },
+        "action_id": "daysSelect",
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Every day",
+              "emoji": true
+            },
+            "value": "?"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Mon-Fri",
+              "emoji": true
+            },
+            "value": "MON-FRI"
+          }
+        ]
+      }
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "mrkdwn",
+          "text": "You can select more times on the <https://inspobot.glitch.me/inspire|website>.  Messages will be sent in *your* time zone."
+        }
+      ]
+    }
+  ]
+}

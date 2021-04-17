@@ -1,0 +1,8 @@
+<footer>
+  <p>
+    <span class="rainbow-text bold">beta</span> -&nbsp;
+    <a href="/">home</a> -&nbsp;
+    <% if (user) { %><a href="/logout">log out</a> -&nbsp;<% } %>
+    made with <a href="https://glitch.com">glitch</a> by <a href="<%= process.env.SOCIAL_URL %>" target="_blank"><%= process.env.SOCIAL_HANDLE %></a>
+  </p>
+</footer>
