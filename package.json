@@ -26,7 +26,7 @@
     "passport": "^0.4.1",
     "passport-slack": "^0.0.7",
     "randomstring": "^1.1.5",
-    "redis": "^3.1.0",
+    "redis": "^3.1.1",
     "sequelize": "^6.6.0",
     "sqlite3": "^5.0.2"
   },
