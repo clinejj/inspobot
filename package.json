@@ -22,7 +22,7 @@
     "express": "^4.17.1",
     "express-basic-auth": "^1.2.0",
     "express-session": "^1.17.1",
-    "node-fetch": "^3.1.1",
+    "node-fetch": "^3.2.10",
     "passport": "^0.6.0",
     "passport-slack": "^0.0.7",
     "randomstring": "^1.1.5",
